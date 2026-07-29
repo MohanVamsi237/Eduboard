@@ -45,8 +45,12 @@ const Dashboard = () => {
     });
     const isTeacher = user?.role === "teacher";
 
-    // Sync latest user profile on mount
+    // Sync latest user profile on mount if not already cached
     useEffect(() => {
+        if (user && (user.id || user._id) && user.username) {
+            return;
+        }
+
         const fetchProfile = async () => {
             try {
                 const res = await api.get("/api/auth/profile");
@@ -260,7 +264,7 @@ const Dashboard = () => {
                 <div className="flex items-center gap-3 sm:gap-6 self-end sm:self-auto">
                     <button
                         onClick={() => navigate("/profile")}
-                        className="w-10 h-10 rounded-full overflow-hidden border border-white/10 focus:outline-none hover:border-indigo-500/50 transition-colors bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm shrink-0 shadow-lg shadow-indigo-500/20"
+                        className="w-10 h-10 rounded-full overflow-hidden border border-white/10 focus:outline-none hover:border-indigo-500/50 transition-colors bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm shrink-0 shadow-lg shadow-indigo-500/20 cursor-pointer"
                         title="View Profile"
                     >
                         {user?.profilePicture ? (

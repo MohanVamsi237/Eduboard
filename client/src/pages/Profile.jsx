@@ -157,7 +157,7 @@ const Profile = () => {
             return;
         }
 
-        const emailRegex = /.+\@.+\..+/;
+        const emailRegex = /.+@.+\..+/;
         if (!emailRegex.test(email.trim())) {
             setError("Please enter a valid email address.");
             return;
@@ -348,7 +348,7 @@ const Profile = () => {
                                         value={fullName}
                                         onChange={(e) => setFullName(e.target.value)}
                                         className="w-full input-glass pl-12 pr-4 py-3.5 rounded-xl focus:outline-none text-sm"
-                                        placeholder="John Doe"
+                                        placeholder="Enter your full name"
                                         required
                                     />
                                 </div>
@@ -423,7 +423,7 @@ const Profile = () => {
                                         value={educationalInstitution}
                                         onChange={(e) => setEducationalInstitution(e.target.value)}
                                         className="w-full input-glass pl-12 pr-4 py-3.5 rounded-xl focus:outline-none text-sm"
-                                        placeholder="Stanford University"
+                                        placeholder="Enter your school or college"
                                     />
                                 </div>
                             </div>
@@ -440,7 +440,7 @@ const Profile = () => {
                                         value={courseOrDepartment}
                                         onChange={(e) => setCourseOrDepartment(e.target.value)}
                                         className="w-full input-glass pl-12 pr-4 py-3.5 rounded-xl focus:outline-none text-sm"
-                                        placeholder="Computer Science"
+                                        placeholder="Enter your course or department"
                                     />
                                 </div>
                             </div>

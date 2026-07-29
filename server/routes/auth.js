@@ -14,6 +14,7 @@ router.use(globalAuthLimiter); // ← NEW
 
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const multer = require('multer');
 const verifyToken = require('../utils/verifyToken');
 
@@ -81,12 +82,9 @@ if (!upload) {
             cb(null, uploadsDir);
         },
         filename: (req, file, cb) => {
-            const safeName = file.originalname
-                .replace(/\.\.\//g, '')
-                .replace(/[^a-zA-Z0-9._-]/g, '_');
-            const ext = path.extname(safeName);
-            const baseName = path.basename(safeName, ext).slice(0, 100);
-            cb(null, 'profile-' + Date.now() + '-' + baseName + ext);
+            const ext = path.extname(file.originalname || '').toLowerCase();
+            const uniqueId = crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex');
+            cb(null, `profile-${uniqueId}${ext}`);
         }
     });
     upload = multer({
